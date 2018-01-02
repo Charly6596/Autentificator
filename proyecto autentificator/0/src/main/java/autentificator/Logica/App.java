@@ -1,6 +1,8 @@
 package autentificator.Logica;
 
-import autentificator.Vistas.Vista;
+import javax.swing.SwingUtilities;
+
+import autentificator.Vistas.VistaPrincipal;
 
 public class App {
 
@@ -10,9 +12,14 @@ public class App {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//Vista v = new Vista();
+		VistaPrincipal v = new VistaPrincipal();
 		
-		
+	    SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+            	new autentificator.Vistas.VistaPrincipal().setVisible(true);
+            	
+            }
+        });		
 	}
 
 }
