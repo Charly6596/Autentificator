@@ -1,34 +1,60 @@
 package registro;
 
-	public class crearusuario {
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class crearusuario {
 
 		private String nombre;
 		private String apellido;
 		private String correo;
-		private String contraseña;
+		private String password;
 		private String fechanacimiento;
 		private char sexo;
 		private String tel;
 		private String direccion;
 		private String nacionalidad;
+		Connection con = null;
+		
 		
 		public void registro(String nombre, String apellido, String correo,
-				String contraseña, String fechanacimiento, char sexo, String tel,
-				String direccion, String nacionalidad){
+				String password, String fechanacimiento, char sexo, String tel,
+				String direccion, String nacionalidad) throws SQLException{
 			
-			@SuppressWarnings("unused")
+			con = DriverManager.getConnection("jdbc:mysql://"/* + host + database , properties*/);
+			Statement st = con.createStatement();
+			
 			String in="INSERT INTO "+" . usuario (nombre , apellidos , correo , contraseña , fechanacimiento ,sexo , tel , direccion , nacionalidad)"
-					+ "VALUE('"+nombre+"','"+apellido+"','"+correo+"','"+contraseña+"','"+fechanacimiento+"','"+sexo+"','"+tel+"','"+direccion+"','"+nacionalidad+"')";
+					+ "VALUE('"+nombre+"','"+apellido+"','"+correo+"','"+password+"','"+fechanacimiento+"','"+sexo+"','"+tel+"','"+direccion+"','"+nacionalidad+"')";
+			st.execute(in);
+		}
+		
+		
+		
+		public boolean login(String correo,String password) {
+			
+			String cor="SELECT correo FROM usuario";
+			String contra="SELECT contraseña FROM usuario";
+			if ((cor==correo)&&(contra==password)) {
+				return true;
+				
+			}else {
+				return false;	
+			}		
 			
 		}
 		
+		
+		
 		public crearusuario(String nombre, String apellido, String correo,
-				String contraseña, String fechanacimiento, char sexo, String tel,
+				String password, String fechanacimiento, char sexo, String tel,
 				String direccion, String nacionalidad) {
 			this.nombre = nombre;
 			this.apellido = apellido;
 			this.correo = correo;
-			this.contraseña = contraseña;
+			this.password = password;
 			this.fechanacimiento = fechanacimiento;
 			this.sexo = sexo;
 			this.tel = tel;
@@ -60,12 +86,12 @@ package registro;
 			this.correo = correo;
 		}
 
-		public String getContraseña() {
-			return contraseña;
+		public String getpassword() {
+			return password;
 		}
 
-		public void setContraseña(String contraseña) {
-			this.contraseña = contraseña;
+		public void setPassword(String password) {
+			this.password = password;
 		}
 
 		public String getFechanacimiento() {
