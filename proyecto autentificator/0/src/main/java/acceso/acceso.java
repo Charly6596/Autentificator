@@ -98,11 +98,14 @@ public class acceso {
 
 	private void vr(String s1, Object codificar) throws NoSuchAlgorithmException {
 		int i = Acode();
-		String a = (String) codificar(i);
+		String s2 = "";
+		s2 = String.valueOf(i);
+		s2 = Integer.toString(i);
+		
 		
 	}
 
-	private Object codificar(int i) throws NoSuchAlgorithmException {
+	private Object codificar(String a, int i) throws NoSuchAlgorithmException {
 		Object password = LogicaComun.Encriptacion.encripta(s1);
 		return null;
 	}
