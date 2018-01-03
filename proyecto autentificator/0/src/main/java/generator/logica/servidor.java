@@ -19,7 +19,6 @@ public class servidor {
 		this.acceso.encriptar();
 		this.acceso.guardar();
 	}
-	private void mostrarCodigo() {
-		//muestra el codigo por pantalla
+	
 
 }

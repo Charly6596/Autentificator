@@ -1,27 +1,24 @@
 package generator.vista;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class frame1 extends frameBase {
-	private JPanel panel;
-	private JButton acceder;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private panel1 panel;
 	public frame1() {
-		this.panel = new JPanel(new BorderLayout(0, 0));
-		this.acceder = new JButton("Acceder");
-		acceder.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				panel.removeAll();
-				panel.updateUI();
-				
-			}
-		});
-		panel.add(acceder, BorderLayout.CENTER);
+		this.panel = new panel1();
 		this.add(panel);
 		setVisible(true);
 	}
