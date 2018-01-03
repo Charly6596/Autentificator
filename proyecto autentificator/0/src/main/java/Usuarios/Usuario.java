@@ -6,21 +6,26 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Usuario {
-
+		private int id;
 		private String nombre;
 		private String apellido;
 		private String correo;
 		private String password;
 		private String fechanacimiento;
-		private char sexo;
+		private String sexo;
 		private String tel;
 		private String direccion;
 		private String nacionalidad;
 		Connection con = null;
 		
+		public Usuario (String nombre, String correo, int id){
+			this.nombre=nombre;
+			this.correo=correo;
+			this.id=id;
+		}
 		
 		public Usuario(String nombre, String apellido, String correo,
-				String password, String fechanacimiento, char sexo, String tel,
+				String password, String fechanacimiento, String sexo, String tel,
 				String direccion, String nacionalidad) {
 			this.nombre = nombre;
 			this.apellido = apellido;
@@ -31,6 +36,13 @@ public class Usuario {
 			this.tel = tel;
 			this.direccion = direccion;
 			this.nacionalidad = nacionalidad;
+		}
+		public void setId(int n){
+			this.id=n;
+		}
+		
+		public int getId(){
+			return id;
 		}
 
 		public String getNombre() {
@@ -73,11 +85,11 @@ public class Usuario {
 			this.fechanacimiento = fechanacimiento;
 		}
 
-		public char getSexo() {
+		public String getSexo() {
 			return sexo;
 		}
 
-		public void setSexo(char sexo) {
+		public void setSexo(String sexo) {
 			this.sexo = sexo;
 		}
 

@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
+
 import conexionDB.ConexionDB;
 
 
@@ -48,9 +50,26 @@ public class Helper_db_Usuario {
 	            pstmt.executeUpdate(); */
 		
 	}
+	public static int getUsuarioByNombre(String correo) throws SQLException{
+		conexionDB.ConexionDB con =new ConexionDB();
+		String sql = "SELECT id FROM usuario WHERE nombre = ? ";
+		 Usuario usuario = null;
+		 PreparedStatement pstmt = con.getConnection().prepareStatement(sql);
+			 pstmt.setString(1, correo);
+			 ResultSet rs  = pstmt.executeQuery();
+			 int nu=0;
+			 while(rs.next()){
+				  nu=rs.getInt("id"); 
+			 }
+			 
+			 
+		
+		
+		return nu;
+		
+	}
 	
-	
-	
+
 	public static boolean login(String correo, String pass) throws SQLException{
 		conexionDB.ConexionDB con =new ConexionDB();
 		
@@ -64,7 +83,7 @@ public class Helper_db_Usuario {
 
 				 pstmt.setString(1, correo);
 
-			
+
 				 
 				 ResultSet rs  = pstmt.executeQuery();
 				 while(rs.next()){
