@@ -7,15 +7,34 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import conexionDB.ConexionDB;
+
 
 public class Helper_db_Usuario {
 
-	public Helper_db_Usuario() {
-		// TODO Auto-generated constructor stub
-	}
 
 	
 	public static void registro(Usuario usuario) throws SQLException{
+		
+		ConexionDB db = new ConexionDB();
+		String in="INSERT INTO usuario (nombre , apellidos , correo , pass , fechanacimiento ,sexo , tel , direccion , nacionalidad)"
+				+ "VALUE(?,?,?,?,?,?,?,?,?)";
+		try(PreparedStatement pstmt = db.getConnection().prepareStatement(in)){
+			pstmt.setString(1, usuario.getNombre());
+            pstmt.setString(2, usuario.getApellido());
+            pstmt.setString(3, usuario.getCorreo());
+            pstmt.setString(4, usuario.getpassword());
+            pstmt.setString(5, usuario.getFechanacimiento());
+            pstmt.setString(6, usuario.getSexo());
+            pstmt.setString(7, usuario.getTel());
+            pstmt.setString(8, usuario.getDireccion());
+            pstmt.setString(9, usuario.getNacionalidad());
+            pstmt.executeUpdate(); 
+		} catch (SQLException e) {
+            System.out.println(e.getMessage()); //TODO: cambiar por registro de logs?
+        } finally {
+        	db.closeConnection();
+        }
 		
 		
 		/*String nombre, String apellido, String correo,
@@ -26,8 +45,8 @@ public class Helper_db_Usuario {
 	//	con = DriverManager.getConnection("jdbc:mysql://"/* + host + database , properties*/);
 	//	Statement st = con.createStatement();
 		
-		String in="INSERT INTO usuario (nombre , apellidos , correo , contraseña , fechanacimiento ,sexo , tel , direccion , nacionalidad)"
-				+ "VALUE(?,?,?,?,?,?,?,?,?)";
+	//	String in="INSERT INTO usuario (nombre , apellidos , correo , contraseña , fechanacimiento ,sexo , tel , direccion , nacionalidad)"
+	//			+ "VALUE(?,?,?,?,?,?,?,?,?)";
 		
       //  BaseDatos bd = new BaseDatos();
 		//	Connection conn = bd.getConnection();

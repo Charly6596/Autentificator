@@ -12,7 +12,7 @@ public class Usuario {
 		private String correo;
 		private String password;
 		private String fechanacimiento;
-		private char sexo;
+		private String sexo;
 		private String tel;
 		private String direccion;
 		private String nacionalidad;
@@ -20,7 +20,7 @@ public class Usuario {
 		
 		
 		public Usuario(String nombre, String apellido, String correo,
-				String password, String fechanacimiento, char sexo, String tel,
+				String password, String fechanacimiento, String sexo, String tel,
 				String direccion, String nacionalidad) {
 			this.nombre = nombre;
 			this.apellido = apellido;
@@ -73,11 +73,11 @@ public class Usuario {
 			this.fechanacimiento = fechanacimiento;
 		}
 
-		public char getSexo() {
+		public String getSexo() {
 			return sexo;
 		}
 
-		public void setSexo(char sexo) {
+		public void setSexo(String sexo) {
 			this.sexo = sexo;
 		}
 
