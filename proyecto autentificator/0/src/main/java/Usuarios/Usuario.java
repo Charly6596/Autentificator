@@ -1,11 +1,11 @@
-package registro;
+package Usuarios;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class crearusuario {
+public class Usuario {
 
 		private String nombre;
 		private String apellido;
@@ -19,36 +19,7 @@ public class crearusuario {
 		Connection con = null;
 		
 		
-		public void registro(String nombre, String apellido, String correo,
-				String password, String fechanacimiento, char sexo, String tel,
-				String direccion, String nacionalidad) throws SQLException{
-			
-			con = DriverManager.getConnection("jdbc:mysql://"/* + host + database , properties*/);
-			Statement st = con.createStatement();
-			
-			String in="INSERT INTO "+" . usuario (nombre , apellidos , correo , contraseña , fechanacimiento ,sexo , tel , direccion , nacionalidad)"
-					+ "VALUE('"+nombre+"','"+apellido+"','"+correo+"','"+password+"','"+fechanacimiento+"','"+sexo+"','"+tel+"','"+direccion+"','"+nacionalidad+"')";
-			st.execute(in);
-		}
-		
-		
-		
-		public boolean login(String correo,String password) {
-			
-			String cor="SELECT correo FROM usuario";
-			String contra="SELECT contraseña FROM usuario";
-			if ((cor==correo)&&(contra==password)) {
-				return true;
-				
-			}else {
-				return false;	
-			}		
-			
-		}
-		
-		
-		
-		public crearusuario(String nombre, String apellido, String correo,
+		public Usuario(String nombre, String apellido, String correo,
 				String password, String fechanacimiento, char sexo, String tel,
 				String direccion, String nacionalidad) {
 			this.nombre = nombre;

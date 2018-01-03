@@ -13,13 +13,9 @@ public class App {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		VistaPrincipal v = new VistaPrincipal();
-		
-	    SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-            	new autentificator.Vistas.VistaPrincipal().setVisible(true);
+           new autentificator.Vistas.VistaPrincipal().setVisible(true);
             	
-            }
-        });		
+         
 	}
 
 }
