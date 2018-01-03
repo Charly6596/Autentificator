@@ -1,5 +1,6 @@
 package autentificator.Logica;
 
+import conexion.Cliente;
 import conexionDB.ConexionDB;
 
 public class Cliente {
@@ -25,7 +26,7 @@ public static void ejecutar(int codigo, int idU){
 	conexionDB.ConexionDB con =new ConexionDB();
 	//Crear conexion a la bd
 	
-	System.out.println("eoeoeoeoeoeoeoeoeo");
+	String ms="eoeoeoeoeoeoeoeoeo";
 	
 	//TODO comprobacion de la clave encritpada en acceso
 	
@@ -35,7 +36,11 @@ public static void ejecutar(int codigo, int idU){
 	//TODO concatenar el codigo del usuario
 	
 	//TODO crear conexion socket al servidor
-	
+//socket nueva clase cliente de socket
+	Cliente cli = new Cliente(); //Se crea el cliente
+
+      System.out.println("Iniciando cliente\n");
+      cli.startClient(ms); //Se inicia el cliente
 	
 	
 	//TODO Envio del codigo mas el codigo del usuario
