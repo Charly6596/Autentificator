@@ -25,7 +25,7 @@ public class ConexionDB {
             System.out.println(e.getMessage());
         }
 	}
-//Conectar a la DB	
+//Conectar a la DB	(esto no hace falta pa na)
 	public Connection getConnection() {
         return this.con;
     }
