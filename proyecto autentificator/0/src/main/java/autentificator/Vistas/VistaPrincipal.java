@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 
 import javax.swing.*;
 
@@ -94,14 +95,18 @@ public class VistaPrincipal extends frameBase {
 				
     			
     		
-    			Helper_db_Usuario.login(correo, password);
-    			
-    			//ComprobarLogin
-    			
-    			
-    			new autentificator.Vistas.VistaCodigo().setVisible(true);;
-    			setVisible(false);
-
+    			try {
+					if(Helper_db_Usuario.login(correo, password)){
+					
+					//ComprobarLogin
+					
+						new autentificator.Vistas.VistaCodigo().setVisible(true);;
+						setVisible(false);
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
     			
     		}
     		

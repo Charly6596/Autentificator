@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import conexionDB.ConexionDB;
+
 
 public class Helper_db_Usuario {
 
@@ -26,7 +28,7 @@ public class Helper_db_Usuario {
 	//	con = DriverManager.getConnection("jdbc:mysql://"/* + host + database , properties*/);
 	//	Statement st = con.createStatement();
 		
-		String in="INSERT INTO usuario (nombre , apellidos , correo , contraseña , fechanacimiento ,sexo , tel , direccion , nacionalidad)"
+		String in="INSERT INTO usuario (nombre , apellidos , correo , pass , fechanacimiento ,sexo , tel , direccion , nacionalidad)"
 				+ "VALUE(?,?,?,?,?,?,?,?,?)";
 		
       //  BaseDatos bd = new BaseDatos();
@@ -49,21 +51,29 @@ public class Helper_db_Usuario {
 	
 	
 	
-	public static boolean login(String correo, String pass){
-		String sql = "SELECT password FROM usuario WHERE correo = ?";
-	//	BaseDatos bd = new BaseDatos(); 
+	public static boolean login(String correo, String pass) throws SQLException{
+		conexionDB.ConexionDB con =new ConexionDB();
+		
+		String sql = "SELECT pass FROM usuario WHERE nombre = ? ";
 		boolean login_correcto = false;
 		String password = "";
 		
-		//	Connection conn = bd.getConnection();
+			Connection conn = con.getConnection();
 	      //    Statement stmt  = conn.createStatement();
-			//  PreparedStatement pstmt = conn.prepareStatement(sql);
-				// pstmt.setString(1, correo);
-				 //ResultSet rs  = pstmt.executeQuery();
-			//	 password = rs.getString("password");
-				 if(pass.equals(password)){
-					 login_correcto = true;
-			 }
+			  PreparedStatement pstmt = conn.prepareStatement(sql);
+
+				 pstmt.setString(1, correo);
+
+			
+				 ResultSet rs  = pstmt.executeQuery();
+				 while(rs.next()){
+					 password = rs.getString("pass");
+
+				 
+					 if(pass.equals(password)){
+					 }
+					 	login_correcto = true;
+				 }
 			 
 		
 	        	
