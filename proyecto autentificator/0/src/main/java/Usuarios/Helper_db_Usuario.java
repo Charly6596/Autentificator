@@ -14,42 +14,32 @@ import conexionDB.ConexionDB;
 
 public class Helper_db_Usuario {
 
-	public Helper_db_Usuario() {
-		// TODO Auto-generated constructor stub
-	}
+		
 
-	
-	public static void registro(Usuario usuario) throws SQLException{
+public static void registro(Usuario usuario) throws SQLException{
 		
-		
-		/*String nombre, String apellido, String correo,
-			String password, String fechanacimiento, char sexo, String tel,
-			String direccion, String nacionalidad*/
-		
-		
-	//	con = DriverManager.getConnection("jdbc:mysql://"/* + host + database , properties*/);
-	//	Statement st = con.createStatement();
-		
+		ConexionDB db = new ConexionDB();
 		String in="INSERT INTO usuario (nombre , apellidos , correo , pass , fechanacimiento ,sexo , tel , direccion , nacionalidad)"
 				+ "VALUE(?,?,?,?,?,?,?,?,?)";
+		try(PreparedStatement pstmt = db.getConnection().prepareStatement(in)){
+			pstmt.setString(1, usuario.getNombre());
+            pstmt.setString(2, usuario.getApellido());
+            pstmt.setString(3, usuario.getCorreo());
+            pstmt.setString(4, usuario.getpassword());
+            pstmt.setString(5, usuario.getFechanacimiento());
+            pstmt.setString(6, usuario.getSexo());
+            pstmt.setString(7, usuario.getTel());
+            pstmt.setString(8, usuario.getDireccion());
+            pstmt.setString(9, usuario.getNacionalidad());
+            pstmt.executeUpdate(); 
+		} catch (SQLException e) {
+            System.out.println(e.getMessage()); //TODO: cambiar por registro de logs?
+        } finally {
+        	db.closeConnection();
+        }
 		
-      //  BaseDatos bd = new BaseDatos();
-		//	Connection conn = bd.getConnection();
+	}	
 
-		/*PreparedStatement pstmt = conn.prepareStatement(in);
-	            pstmt.setString(1, usuario.getNombre());
-	            pstmt.setString(2, usuario.getApellido());
-	            pstmt.setString(3, usuario.getCorreo());
-	            pstmt.setString(4, usuario.getpassword());
-	            pstmt.setString(5, usuario.getFechanacimiento());
-	            pstmt.setString(6, usuario.getSexo());
-	            pstmt.setString(7, usuario.getTel());
-	            pstmt.setString(8, usuario.getDireccion());
-	            pstmt.setString(9, usuario.getNacionalidad());
-	            
-	            pstmt.executeUpdate(); */
-		
-	}
 	public static int getUsuarioByNombre(String correo) throws SQLException{
 		conexionDB.ConexionDB con =new ConexionDB();
 		String sql = "SELECT id FROM usuario WHERE nombre = ? ";
