@@ -46,8 +46,8 @@ public class acceso {
 	
 	public static void codificar() throws NoSuchAlgorithmException, SQLException {
 		a = Acode(randomNum);//Almacenamos Acode en una variable
-		b = (String) password;
 		Object password = LogicaComun.Encriptacion.encripta(s1);
+		b = (String) password;
 		System.out.println(a + " " + password);
 		acceso.insertarAceeso();	
 	}
@@ -69,7 +69,7 @@ public class acceso {
 		PreparedStatement pstmt = con.prepareStatement("INSERT INTO acceso (salt) VALUES (?)");
 
 		//Ejecución
-		pstmt.setString(64, b);
+		pstmt.setNString(1, b);
 		
 		//No es necesário usar "ResultSet" porque queremos insertar un valor no recogerlo
 		pstmt.execute();
