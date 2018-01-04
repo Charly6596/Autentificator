@@ -39,6 +39,8 @@ public class Servidor extends Conexion implements Callable<String> //Se hereda d
             {
                 //Se muestra por pantalla el mensaje recibido
                this.codigo = mensajeServidor;
+               System.out.println(mensajeServidor);
+
             }
 
             System.out.println("Fin de la conexión");

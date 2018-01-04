@@ -21,7 +21,7 @@ public class ConexionDB {
 		props.put("password", "gpjqAIM2zf");
 		try { 
 		con = DriverManager.getConnection( URL_DEFAULT, props);
-        System.out.println("Se ha conectado a la base de datos SQLite.");
+        System.out.println("Se ha conectado a la base de datos");
 		} catch (SQLException e) {
             System.out.println(e.getMessage());
         }
