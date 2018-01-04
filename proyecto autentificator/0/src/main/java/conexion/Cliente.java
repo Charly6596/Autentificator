@@ -2,6 +2,8 @@ package conexion;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Scanner;
+
 import conexion.Conexion;
 
 public class Cliente extends Conexion
@@ -10,6 +12,7 @@ public class Cliente extends Conexion
 
     public void startClient(String mensaje) //Método para iniciar el cliente
     {
+    	Scanner sc = new Scanner(System.in);
         try
         {
             //Flujo de datos hacia el servidor
@@ -19,11 +22,10 @@ public class Cliente extends Conexion
             for (int i = 0; i < 1; i++)
             {
                 //Se escribe en el servidor usando su flujo de datos
-                salidaServidor.writeUTF("mensaje :" + mensaje + "\n");
+                salidaServidor.writeUTF(sc.nextLine());
             }
-
-            cs.close();//Fin de la conexión
-
+            cs.close();
+            sc.close();
         }
         catch (Exception e)
         {

@@ -1,5 +1,6 @@
 package generator;
 
+import generator.logica.logicaThreadServidor;
 import generator.vista.frame1;
 
 /**
@@ -12,5 +13,6 @@ public class App
     {
         System.out.println( "Hello World!" );
         new frame1();
-    }
+        
+}
 }

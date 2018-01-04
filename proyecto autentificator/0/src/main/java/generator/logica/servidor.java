@@ -12,7 +12,6 @@ public class servidor {
 		this.acceso = new Acceso();
 		this.conexion = new Conexion();
 		generarCodigo();
-		
 	}
 	private Acceso generarCodigo() {
 		this.acceso.generarCodigo();
