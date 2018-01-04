@@ -1,18 +1,18 @@
-package conexion;
+package conexionSocket;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
 
-import conexion.Conexion;
+import conexionSocket.Conexion;
 
-public class ClienteSocket extends Conexion
+public class Cliente extends Conexion
 {
-    public ClienteSocket() throws IOException{super("cliente");} //Se usa el constructor para cliente de Conexion
+    public Cliente() throws IOException{super("cliente");} //Se usa el constructor para cliente de Conexion
 
     public void startClient(String mensaje) //Método para iniciar el cliente
     {
-    	//Scanner sc = new Scanner(System.in);
+    	Scanner sc = new Scanner(System.in);
         try
         {
             //Flujo de datos hacia el servidor
@@ -22,10 +22,10 @@ public class ClienteSocket extends Conexion
             for (int i = 0; i < 1; i++)
             {
                 //Se escribe en el servidor usando su flujo de datos
-                salidaServidor.writeUTF(mensaje);
+                salidaServidor.writeUTF(sc.nextLine());
             }
             cs.close();
-         //  sc.close();
+            sc.close();
         }
         catch (Exception e)
         {

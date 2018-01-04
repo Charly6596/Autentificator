@@ -14,9 +14,9 @@ public class App {
 		/*String s1=null;
 		s1 =  acceso.acceso.Acode();*/
 		// TODO Auto-generated method stub
-		//VistaPrincipal v = new VistaPrincipal();
-          // new autentificator.Vistas.VistaPrincipal().setVisible(true);
-		System.out.println(acceso.acceso.Acode());	
+		VistaPrincipal v = new VistaPrincipal();
+           new autentificator.Vistas.VistaPrincipal().setVisible(true);
+		//System.out.println(acceso.acceso.Acode());	
          
 	}
 

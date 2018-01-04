@@ -1,7 +1,8 @@
-package conexion;
+package conexionSocket;
 
 import java.io.IOException;
-import conexion.Cliente;
+
+import conexionSocket.Cliente;
 
 
 //Clase principal que hará uso del cliente

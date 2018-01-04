@@ -1,4 +1,4 @@
-package conexion;
+package conexionSocket;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -8,7 +8,7 @@ import java.net.BindException;
 import java.net.ServerSocket;
 import java.util.concurrent.Callable;
 
-import conexion.Conexion;
+import conexionSocket.Conexion;
 
 public class Servidor extends Conexion implements Callable<String> //Se hereda de conexión para hacer uso de los sockets y demás
 {
@@ -30,8 +30,10 @@ public class Servidor extends Conexion implements Callable<String> //Se hereda d
             salidaCliente = new DataOutputStream(cs.getOutputStream());
 
             //Se le envía un mensaje al cliente usando su flujo de salida
-            salidaCliente.writeUTF("Petición recibida y aceptada");
+          //  salidaCliente.writeUTF("Petición recibida y aceptada");
+            System.out.println("Petición recibida y aceptada");
 
+            
             //Se obtiene el flujo entrante desde el cliente
             BufferedReader entrada = new BufferedReader(new InputStreamReader(cs.getInputStream()));
 

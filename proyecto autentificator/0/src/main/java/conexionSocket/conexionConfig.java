@@ -1,4 +1,4 @@
-package conexion;
+package conexionSocket;
 
 public final class conexionConfig {
 	public final static String HOST = "localhost";

@@ -1,4 +1,4 @@
-package conexion;
+package conexionSocket;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

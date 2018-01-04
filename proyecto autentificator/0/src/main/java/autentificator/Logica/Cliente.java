@@ -2,8 +2,8 @@ package autentificator.Logica;
 
 import java.io.IOException;
 
-import conexion.ClienteSocket;
 import conexionDB.ConexionDB;
+import conexionSocket.ClienteSocket;
 
 public class Cliente {
 	//Datos del cliente interesantes en el futuro
