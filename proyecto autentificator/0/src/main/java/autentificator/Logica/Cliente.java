@@ -1,6 +1,7 @@
 package autentificator.Logica;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 import conexionDB.ConexionDB;
 import conexionSocket.ClienteSocket;
@@ -28,8 +29,13 @@ public static void ejecutar(int codigo, int idU){
 	
 	conexionDB.ConexionDB con =new ConexionDB();
 	//Crear conexion a la bd
-	//
 	
+	try {
+		String hash=LogicaComun.Encriptacion.encripta(mens);
+	} catch (NoSuchAlgorithmException e1) {
+		// TODO Auto-generated catch block
+		System.out.println("Error al encriptar");
+	}
 	
 	//TODO comprobacion de la clave encritpada en acceso
 	
