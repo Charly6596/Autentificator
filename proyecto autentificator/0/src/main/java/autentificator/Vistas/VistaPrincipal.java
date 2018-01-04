@@ -6,10 +6,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 
 import javax.swing.*;
 
 import Usuarios.Helper_db_Usuario;
+import Usuarios.Usuario;
 
 public class VistaPrincipal extends frameBase {
 
@@ -94,14 +96,18 @@ public class VistaPrincipal extends frameBase {
 				
     			
     		
-    			Helper_db_Usuario.login(correo, password);
-    			
-    			//ComprobarLogin
-    			
-    			
-    			new autentificator.Vistas.VistaCodigo().setVisible(true);;
-    			setVisible(false);
-
+    			try {
+					if(Helper_db_Usuario.login(correo, password)){
+					
+					//ComprobarLogin
+						//Usuario u =null;
+					int idu= Helper_db_Usuario.getUsuarioByNombre(correo);
+						new autentificator.Vistas.VistaCodigo(idu).setVisible(true);;
+						setVisible(false);
+					}
+				} catch (SQLException e1) {
+					System.out.println("Error al logear");
+				}
     			
     		}
     		

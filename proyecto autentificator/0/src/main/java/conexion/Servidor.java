@@ -4,14 +4,20 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.BindException;
+import java.net.ServerSocket;
+import java.util.concurrent.Callable;
+
 import conexion.Conexion;
 
-public class Servidor extends Conexion //Se hereda de conexión para hacer uso de los sockets y demás
+public class Servidor extends Conexion implements Callable<String> //Se hereda de conexión para hacer uso de los sockets y demás
 {
-    public Servidor() throws IOException{super("servidor");} //Se usa el constructor para servidor de Conexion
+	String codigo;
+    public Servidor() throws IOException, BindException{super("servidor");} //Se usa el constructor para servidor de Conexion
 
-    public void startServer()//Método para iniciar el servidor
+    public String startServer()//Método para iniciar el servidor
     {
+    	codigo = null;
         try
         {
             System.out.println("Esperando..."); //Esperando conexión
@@ -32,7 +38,7 @@ public class Servidor extends Conexion //Se hereda de conexión para hacer uso d
             while((mensajeServidor = entrada.readLine()) != null) //Mientras haya mensajes desde el cliente
             {
                 //Se muestra por pantalla el mensaje recibido
-                System.out.println(mensajeServidor);
+               this.codigo = mensajeServidor;
             }
 
             System.out.println("Fin de la conexión");
@@ -43,5 +49,17 @@ public class Servidor extends Conexion //Se hereda de conexión para hacer uso d
         {
             System.out.println(e.getMessage());
         }
+        if(!codigo.isEmpty())
+        	return codigo;
+        else
+        	return null;
     }
+    public ServerSocket getSS() {
+    	return this.ss;
+    }
+	public String call() throws Exception {
+		String codigo = startServer();
+		return codigo;
+		
+	}
 }

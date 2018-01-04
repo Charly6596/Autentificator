@@ -6,17 +6,19 @@ import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import Usuarios.Usuario;
 import generator.vista.frameBase;
 
 public class VistaCodigo extends frameBase {
 
-	public VistaCodigo() {
+	public VistaCodigo(final int idu) {
 		// Ventana
 				super();
 		        setSize(400, 300);
@@ -36,11 +38,11 @@ public class VistaCodigo extends frameBase {
 		        cp.add(etiqueta,gU1);
 		        
 		        
-		        JTextField texto = new JTextField(10);
+		        final JTextField numero = new JTextField(10);
 		        GridBagConstraints gU2 = new GridBagConstraints();
 		        gU2.gridx=0;
 		        gU2.gridy=1;
-		        cp.add(texto,gU2);
+		        cp.add(numero,gU2);
 		        
 		      
 		        JButton ok =new JButton("Comprobar");
@@ -56,12 +58,18 @@ public class VistaCodigo extends frameBase {
 		    	ActionListener action = new ActionListener() {
 		    		
 		    		public void actionPerformed(ActionEvent e) {
+		    			int n=0;
 		    			
+		    			 n=Integer.parseInt(numero.getText());
+		    		//comprobar si hay numeros
+		    				
 		    			
+		    			autentificator.Logica.Cliente.ejecutar(n, idu);
 		    			//ComprobarCodigo
 		    			
-		    			new autentificator.Vistas.VistaConfirmacion().setVisible(true);;
-		    			setVisible(false);
+		    			
+		    		//	new autentificator.Vistas.VistaConfirmacion().setVisible(true);;
+		    		//	setVisible(false);
 
 		    			
 		    		}
