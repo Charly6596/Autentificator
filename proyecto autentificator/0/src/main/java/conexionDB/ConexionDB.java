@@ -11,14 +11,14 @@ import java.util.Properties;
 public class ConexionDB {
 	private Connection con = null;
 //Ruta BD
-	private static final String URL_DEFAULT = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11213116";
+	private static final String URL_DEFAULT = "jdbc:mysql://den1.mysql1.gear.host/autentificator";
 //Crear objeto conexion
 	public ConexionDB(){
 		// Usamos un objeto de properties para pasar
 		// de una manera más cómoda el user, password
 		Properties props = new Properties();		
-		props.put("user", "sql11213116");
-		props.put("password", "gpjqAIM2zf");
+		props.put("user", "autentificator");
+		props.put("password", "V8q49idq*");
 		try { 
 		con = DriverManager.getConnection( URL_DEFAULT, props);
         System.out.println("Se ha conectado a la base de datos");

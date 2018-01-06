@@ -1,3 +1,4 @@
-/autentificator
-/conexionSocket
-/generator
+/conexionSocket/
+/generator/
+/conexionDB/
+/Usuarios/

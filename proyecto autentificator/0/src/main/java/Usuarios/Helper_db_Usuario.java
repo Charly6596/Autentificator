@@ -40,6 +40,20 @@ public static void registro(Usuario usuario) throws SQLException{
 		
 	}	
 
+	public static Usuario getUsuarioByID(int id) throws SQLException {
+		conexionDB.ConexionDB con =new ConexionDB();
+		String sql = "SELECT * FROM usuario WHERE id = ? ";
+		 Usuario usuario = null;
+		 PreparedStatement pstmt = con.getConnection().prepareStatement(sql);
+			 pstmt.setInt(1, id);
+			 ResultSet rs  = pstmt.executeQuery();
+			 
+			 while(rs.next()){
+				  usuario = new Usuario(rs.getString("nombre"), rs.getString("apellidos"), rs.getInt("id"));
+			 }		
+		return usuario;		
+	}
+	
 	public static int getUsuarioByNombre(String correo) throws SQLException{
 		conexionDB.ConexionDB con =new ConexionDB();
 		String sql = "SELECT id FROM usuario WHERE nombre = ? ";
@@ -50,11 +64,7 @@ public static void registro(Usuario usuario) throws SQLException{
 			 int nu=0;
 			 while(rs.next()){
 				  nu=rs.getInt("id"); 
-			 }
-			 
-			 
-		
-		
+			 }		
 		return nu;
 		
 	}
