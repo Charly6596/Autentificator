@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 
 import Usuarios.Helper_db_Usuario;
 import Usuarios.Usuario;
+import acceso.Helper_acceso;
+import acceso.modelo_acceso;
 import conexionSocket.serverVar;
 import conexionSocket.serverVarEvent;
 import conexionSocket.serverVarListener;
@@ -34,9 +36,10 @@ public class panel1 extends JPanel {
 		this.add(panel2);
 	}
 	private void anadirComponentes3() {
-		try {
-			String codigo = serverVar.getCodigo();
-			Usuario usuario = Helper_db_Usuario.getUsuarioByID(Integer.parseInt(codigo));
+		String codigo = serverVar.getCodigo();
+		int idU = Integer.parseInt(codigo);
+		try {			
+			Usuario usuario = Helper_db_Usuario.getUsuarioByID(idU);
 			StringBuilder sb = new StringBuilder("Bienvenid@ ");
 			sb.append(usuario.getNombre());
 			panel2.add(new JLabel(sb.toString()));
@@ -55,15 +58,21 @@ public class panel1 extends JPanel {
 		panel2.add(textobienvenida);
 		panel2.add(acceder);
 	}
+	private void generarTextoCodigo() {
+		modelo_acceso acceso = new modelo_acceso();
+		StringBuilder sb = new StringBuilder("Código: ");
+		sb.append(acceso.getCodigo());
+		sb.append(acceso.getId_acceso());
+		this.textocodigo.setText(sb.toString());
+	}
 	private void inicializarComponentes() {
 		this.textobienvenida = new JLabel("Pulse acceder para generar la clave");
-		this.acceder = new JButton("Acceder1");
-		this.textocodigo = new JLabel("Código: 934bAk2");
+		this.acceder = new JButton("Acceder1");		
+		this.textocodigo = new JLabel();
 		this.volver = new JButton("volver");
 		this.panel2 = new JPanel();
 		this.nuevocodigo = new JButton("Otro código");
-
-		final logicaThreadServidor logica = new logicaThreadServidor();
+		
 
 		panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
 		ActionListener al1, al2;
@@ -104,9 +113,9 @@ public class panel1 extends JPanel {
 					e1.printStackTrace();
 				}
 				panel2.removeAll();
+				generarTextoCodigo();
 				anadirComponentes2();
 				panel2.updateUI();
-				
 			}
 		});
 		nuevocodigo.addActionListener(al1);

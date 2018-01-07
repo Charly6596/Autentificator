@@ -10,13 +10,14 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import acceso.modelo_acceso;
 import conexionSocket.Server;
 import conexionSocket.serverVar;
 import conexionSocket.serverVarEvent;
 import conexionSocket.serverVarListener;
 
 public class serverLogica {
-	ExecutorService executor = Executors.newSingleThreadExecutor();
+	ExecutorService executor = Executors.newCachedThreadPool();
 	ScheduledExecutorService executor2 = Executors.newScheduledThreadPool(1);
     Future<String> future = null;
     Server server = null;

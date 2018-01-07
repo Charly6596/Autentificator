@@ -5,32 +5,34 @@ import java.util.Random;
 
 public class modelo_acceso {
 	//A esto no se le está dando uso, por eso lo he comentado!!!!!!!!!!!!!!!!
-/*
+
 	//atributos de la clase acceso
 	private String codigo;
 	private String salt;
+	private int id_acceso;
 	
 	//contructor
-	public modelo_acceso(String codigo, String salt) {
-		this.codigo = codigo;
-		this.salt = salt;
+	public modelo_acceso() {
+		generarCodigo();
+		guardarCodigo();
 	}
-*/	
+	
 	
 	//método número aleatorio
-	public int generarCodigo() {
+	private void generarCodigo() {
 		int rand = 0;
 		Random rnd = new Random();
 		rand = rnd.nextInt(89999)+10000;
-		return rand;
+		this.codigo = Integer.toString(rand);
 	}
 	
-	//numero aleatorio sacado del método número aleatorio
-	String s1 = Integer.toString(generarCodigo());
-	
 	//codificar
+	private void guardarCodigo() {
+		this.id_acceso = Helper_acceso.insertarAcceso(this.codigo);
+		//TODO: comprobar que no este el codigo repetido
+	}
 	
-	public String codificaCodigo(String s1) {
+	private String codificaCodigo(String s1) {
 		String b=null;
 		try {
 			b = LogicaComun.Encriptacion.encripta(s1);
@@ -40,15 +42,27 @@ public class modelo_acceso {
 		}
 		return b;
 	}
+
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public int getId_acceso() {
+		return id_acceso;
+	}
+
+
+	public void setId_acceso(int id_acceso) {
+		this.id_acceso = id_acceso;
+	}
 	
-	//numero codificado
-	String codif = codificaCodigo(s1);
-	
-	//mete el numero codificado en la DB y recibe el id de esa tabla
-	int id_acceso = Helper_acceso.insertarAcceso(codif);
-		
-		
-	//Aqui deberían ir los getters setters y toString
 	
 	
 	

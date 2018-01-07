@@ -3,6 +3,7 @@ package autentificator.Logica;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
+import acceso.Helper_acceso;
 import conexionDB.ConexionDB;
 import conexionSocket.ClienteSocket;
 
@@ -25,10 +26,11 @@ public class Cliente {
 public static void ejecutar(int codigo, int idU){
 	// recibir codigo desde la vista
 	String mens=Integer.toString(codigo);
-
-	
-	conexionDB.ConexionDB con =new ConexionDB();
+	int idA = Integer.parseInt(mens.substring(4));
+	int idUsuario = idU;
+	conexionDB.ConexionDB con = new ConexionDB();
 	//Crear conexion a la bd
+	
 	
 	try {
 		String hash=LogicaComun.Encriptacion.encripta(mens);
@@ -38,8 +40,10 @@ public static void ejecutar(int codigo, int idU){
 	}
 	
 	//TODO comprobacion de la clave encritpada en acceso
-	
-	
+	StringBuilder sb = new StringBuilder(Helper_acceso.getCodigoAcceso(idA));
+	sb.append(Integer.toString(idUsuario));
+	if(mens.equals(sb.toString()))
+		Helper_acceso.setUsuarioAcceso(idA, idUsuario);
 	// obtener el id usuario que se quiere conectar
 	
 	//TODO concatenar el codigo del usuario
@@ -52,7 +56,7 @@ public static void ejecutar(int codigo, int idU){
 	} catch (IOException e) {
 		e.printStackTrace();
 	}
-      cli.startClient(mens);	
+      cli.startClient(Integer.toString(idU));	
 	// Envio del codigo mas el codigo del usuario
 
 	

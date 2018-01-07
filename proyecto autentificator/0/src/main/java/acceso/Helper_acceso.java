@@ -7,24 +7,50 @@ import java.sql.SQLException;
 import conexionDB.ConexionDB;
 
 public class Helper_acceso {
-	//Debe recibir un String a introducir en el campo Salt de la tabla
-	//Y devuelve un int del id
-	public static int insertarAcceso(String s1) {
+	
+	public static int insertarAcceso(String codigo) {
 		ConexionDB db = new ConexionDB();
-		//String ins="INSERT INTO acceso (salt) VALUES (?)";
-		String consulta="BEGIN;	INSERT INTO acceso (salt) VALUES (?); SELECT `id` FROM acceso ORDER BY `id` DESC LIMIT 1; COMMIT;";
+		String insertarCodigo = "INSERT INTO acceso (salt) VALUES (?)";
+		String obtenerID = "SELECT id FROM acceso ORDER BY id DESC LIMIT 1";
 		int devuelta = -1;
 		try {
-			PreparedStatement pstmt = db.getConnection().prepareStatement(consulta);
-			//Ejecución
-			pstmt.setString(1, s1);
-			ResultSet rs = pstmt.executeQuery();
+			db.getConnection().setAutoCommit(false);
+			
+			PreparedStatement pstmtInsert = db.getConnection().prepareStatement(insertarCodigo);
+			pstmtInsert.setString(1, codigo);
+			pstmtInsert.executeUpdate();
+		
+			PreparedStatement pstmtObtenerID = db.getConnection().prepareStatement(obtenerID);
+			ResultSet rs = pstmtObtenerID.executeQuery();
+			db.getConnection().commit();
 			
 			// De esta forma vamos a saber si hay tablas o no
 			if(rs.next()) {
 				devuelta = rs.getInt(1);
 			}
 			//Cerramos ResultSet y Statement
+			rs.close();
+			pstmtInsert.close();
+			pstmtObtenerID.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.closeConnection();
+		}
+		return devuelta;
+	}
+	public static int getUsuarioAcceso(int id) {
+		ConexionDB db = new ConexionDB();
+		String consulta = "SELECT idU FROM acceso WHERE id = (?)";
+		int devuelta = -1;
+		try {
+			PreparedStatement pstmt = db.getConnection().prepareStatement(consulta);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				devuelta = rs.getInt(1);
+			}
 			rs.close();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -34,18 +60,48 @@ public class Helper_acceso {
 			db.closeConnection();
 		}
 		return devuelta;
+		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
+	public static String getCodigoAcceso(int idA) {
+		ConexionDB db = new ConexionDB();
+		String consulta = "SELECT salt FROM acceso WHERE id = (?)";
+		String devuelta = "-1";
+		try {
+			PreparedStatement pstmt = db.getConnection().prepareStatement(consulta);
+			pstmt.setInt(1, idA);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				devuelta = rs.getString(1);
+			}
+			rs.close();
+			pstmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.closeConnection();
+		}
+		return devuelta;
+		
+	}
+	public static void setUsuarioAcceso(int idA, int idU) {
+		ConexionDB db = new ConexionDB();
+		String consulta = "UPDATE acceso SET idU = (?) WHERE id = (?)";
+		try {
+			PreparedStatement pstmt = db.getConnection().prepareStatement(consulta);
+			pstmt.setInt(1, idU);
+			pstmt.setInt(2, idA);
+			pstmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.closeConnection();
+		}
+		
+	}
 }
-
-
 
 
 
