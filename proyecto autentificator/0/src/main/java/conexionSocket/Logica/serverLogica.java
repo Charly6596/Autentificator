@@ -47,14 +47,13 @@ public class serverLogica {
 			    public void run(){
 			        future.cancel(true);
 			    } 
-			}, 50, TimeUnit.SECONDS);
-			server.stopServer();
-			
+			}, 20, TimeUnit.SECONDS);			
 		    
-		}catch(java.net.BindException e1){
-			System.out.println("Ya hay un código generado");
+		}catch(NullPointerException e) {
 			
-		}finally {
+			
+		}
+	    finally {
 			executor.shutdownNow();	
 			executor2.shutdownNow();	
 		}

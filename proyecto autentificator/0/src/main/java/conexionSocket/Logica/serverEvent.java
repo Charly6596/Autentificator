@@ -6,11 +6,9 @@ import conexionSocket.Server;
 
 public class serverEvent extends EventObject {
 
-	Server server;
 	
-	public serverEvent(Object source, Server server) {	
+	public serverEvent(Object source) {	
 		super(source);
-		this.server = server;
 	}
 
 

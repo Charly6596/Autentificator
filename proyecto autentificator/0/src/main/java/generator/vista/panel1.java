@@ -45,7 +45,7 @@ public class panel1 extends JPanel {
 			panel2.add(new JLabel(sb.toString()));
 			panel2.add(volver);
 		} catch (NumberFormatException | SQLException e) {
-			e.printStackTrace();
+			
 		}
 		
 	}

@@ -22,11 +22,16 @@ public class Server extends Conexion implements Callable<String> {
 		super("servidor");
 		this.codigo = null;
 		this.recibido = false;
-		this.listeners = new ArrayList<>();
+		listeners = new ArrayList<>();
 	}
 	
 	public void listenSockets() throws IOException { //pone el socket a escuchar
-		startServer();
+		try {
+			startServer();
+		}catch(Exception e) {
+			System.out.println("fallo al inciair");
+		}
+		
 
         System.out.println("Esperando..."); //Esperando conexión
 
@@ -44,10 +49,12 @@ public class Server extends Conexion implements Callable<String> {
         }
         if(this.codigo != null)
         	setRecibido(true);
+        
         stopServer();
 	}
 	
-	public void startServer() throws IOException {
+	public void startServer() throws Exception {
+		
 		if(this.ss.isClosed()) {
 			ss = new ServerSocket(PUERTO);//Se crea el socket para el servidor en puerto 1234
             cs = new Socket(); //Socket para el cliente
@@ -74,7 +81,7 @@ public class Server extends Conexion implements Callable<String> {
 	  ListIterator<serverListener> li = listeners.listIterator();
 	  while (li.hasNext()) {
           serverListener listener =  li.next();
-          serverEvent readerEvObj = new serverEvent(this, this);
+          serverEvent readerEvObj = new serverEvent(this);
           (listener).onRecibido(readerEvObj);
       }
   }
@@ -82,7 +89,7 @@ public class Server extends Conexion implements Callable<String> {
 		if(this.codigo != null)
 			return this.codigo;
 		else
-			return "sin codigo";
+			return "-1";
 	}
 	
 	@Override
