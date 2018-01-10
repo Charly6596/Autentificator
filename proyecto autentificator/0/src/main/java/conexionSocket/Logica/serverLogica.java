@@ -18,7 +18,7 @@ import conexionSocket.serverVarListener;
 
 public class serverLogica {
 	ExecutorService executor = Executors.newCachedThreadPool();
-	ScheduledExecutorService executor2 = Executors.newScheduledThreadPool(1);
+	ScheduledExecutorService executor2 = Executors.newScheduledThreadPool(1); //Para el shutdown
     Future<String> future = null;
     Server server = null;
     public serverLogica() {
@@ -45,9 +45,18 @@ public class serverLogica {
 			executor2.schedule(new Runnable() { //para el thread cuando acaba el tiempo
 			    @Override
 			    public void run(){
-			        future.cancel(true);
+			        System.out.println("para server");
+			        future.cancel(true); //No lo para
+			        System.out.println("para server");
+			        try {
+						server.stopServer();
+						System.out.println("para server");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 			    } 
-			}, 20, TimeUnit.SECONDS);			
+			}, 5, TimeUnit.SECONDS);			
 		    
 		}catch(NullPointerException e) {
 			

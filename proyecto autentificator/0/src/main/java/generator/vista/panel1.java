@@ -14,13 +14,11 @@ import javax.swing.JPanel;
 
 import Usuarios.Helper_db_Usuario;
 import Usuarios.Usuario;
-import acceso.Helper_acceso;
 import acceso.modelo_acceso;
 import conexionSocket.serverVar;
 import conexionSocket.serverVarEvent;
 import conexionSocket.serverVarListener;
 import conexionSocket.Logica.serverLogica;
-import generator.logica.logicaThreadServidor;
 
 public class panel1 extends JPanel {
 	JLabel textobienvenida;

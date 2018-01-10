@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 import conexionSocket.Logica.serverLogica;
-import generator.logica.logicaThreadServidor;
 import generator.vista.frame1;
 
 /**
