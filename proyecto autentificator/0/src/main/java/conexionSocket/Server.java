@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
 import conexionSocket.Logica.serverEvent;
 import conexionSocket.Logica.serverListener;
@@ -26,6 +27,7 @@ public class Server extends Conexion implements Callable<String> {
 	}
 	
 	public void listenSockets() throws IOException { //pone el socket a escuchar
+		 try {
 		try {
 			startServer();
 		}catch(Exception e) {
@@ -34,9 +36,11 @@ public class Server extends Conexion implements Callable<String> {
 		
 
         System.out.println("Esperando..."); //Esperando conexión
-
+        TimeUnit.MICROSECONDS.sleep(5);
         cs = ss.accept(); //Accept comienza el socket y espera una conexión desde un cliente
-
+       
+		
+		
         System.out.println("Cliente en línea");            
         //Se obtiene el flujo entrante desde el cliente
         BufferedReader entrada = new BufferedReader(new InputStreamReader(cs.getInputStream()));
@@ -49,8 +53,12 @@ public class Server extends Conexion implements Callable<String> {
         }
         if(this.codigo != null)
         	setRecibido(true);
+		 } catch (InterruptedException e) {
+				System.out.println("Sa interrumpio");
+			}finally {
+				stopServer();
+			}
         
-        stopServer();
 	}
 	
 	public void startServer() throws Exception {
@@ -68,7 +76,9 @@ public class Server extends Conexion implements Callable<String> {
 		}
 		
 	}
-
+public void parar() {
+	Thread.currentThread().interrupt();
+}
   public void addEventListener(serverListener listener) {
         listeners.add(listener);
     }

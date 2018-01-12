@@ -40,23 +40,24 @@ public class serverLogica {
 	    try {
 			System.out.println("Started..");
 			future = executor.submit(server);	//inicia el thread
+			//server.parar();
 			System.out.println("Finished!");	
 			server.addEventListener(svl); //añade el evento al thread
 			executor2.schedule(new Runnable() { //para el thread cuando acaba el tiempo
 			    @Override
 			    public void run(){
-			        System.out.println("para server");
-			        future.cancel(true); //No lo para
-			        System.out.println("para server");
-			        try {
-						server.stopServer();
+			    	try {
+			    		System.out.println("para server");
+				       // future.cancel(true); //No lo para
+				        System.out.println("para server");
+				   		//server.stopServer();
 						System.out.println("para server");
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+			    	}catch (Throwable t) {
+			    		t.printStackTrace();
+			    	}
+			        
 			    } 
-			}, 5, TimeUnit.SECONDS);			
+			},5, TimeUnit.SECONDS);			
 		    
 		}catch(NullPointerException e) {
 			

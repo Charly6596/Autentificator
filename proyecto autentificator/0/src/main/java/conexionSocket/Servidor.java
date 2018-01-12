@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.net.BindException;
 import java.net.ServerSocket;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 import conexionSocket.Conexion;
 
@@ -32,7 +33,6 @@ public class Servidor extends Conexion implements Callable<String> //Se hereda d
             //Se le envía un mensaje al cliente usando su flujo de salida
           //  salidaCliente.writeUTF("Petición recibida y aceptada");
             System.out.println("Petición recibida y aceptada");
-
             
             //Se obtiene el flujo entrante desde el cliente
             BufferedReader entrada = new BufferedReader(new InputStreamReader(cs.getInputStream()));
